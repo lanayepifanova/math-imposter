@@ -203,21 +203,76 @@ export const HINT_GROUPS: Record<Category, HintGroup[]> = {
       words: ['Penguin', 'Eagle', 'Hawk', 'Owl', 'Parrot', 'Flamingo', 'Peacock', 'Duck', 'Bird'],
     },
     {
-      hint: 'fur',
-      words: [
-        'Dog', 'Cat', 'Horse', 'Cow', 'Sheep', 'Goat', 'Pig', 'Rabbit', 'Deer', 'Fox', 'Wolf', 'Bear',
-        'Lion', 'Tiger', 'Leopard', 'Cheetah', 'Elephant', 'Giraffe', 'Zebra', 'Rhino', 'Hippo',
-        'Kangaroo', 'Koala', 'Panda', 'Monkey', 'Gorilla', 'Chimpanzee', 'Moose', 'Bison', 'Camel',
-        'Raccoon', 'Armadillo', 'Platypus', 'Wombat', 'Sloth', 'Hedgehog',
-      ],
+      hint: 'feline',
+      words: ['Cat', 'Lion', 'Tiger', 'Leopard', 'Cheetah'],
+    },
+    {
+      hint: 'canine',
+      words: ['Dog', 'Wolf', 'Fox'],
+    },
+    {
+      hint: 'hooves',
+      words: ['Horse', 'Cow', 'Sheep', 'Goat', 'Pig', 'Deer', 'Moose', 'Bison', 'Camel'],
+    },
+    {
+      hint: 'long neck',
+      words: ['Giraffe'],
+    },
+    {
+      hint: 'stripes',
+      words: ['Zebra'],
+    },
+    {
+      hint: 'trunk',
+      words: ['Elephant'],
+    },
+    {
+      hint: 'horn',
+      words: ['Rhino'],
+    },
+    {
+      hint: 'river',
+      words: ['Hippo'],
+    },
+    {
+      hint: 'pouch',
+      words: ['Kangaroo', 'Koala', 'Wombat'],
+    },
+    {
+      hint: 'primate',
+      words: ['Monkey', 'Gorilla', 'Chimpanzee'],
+    },
+    {
+      hint: 'bear',
+      words: ['Bear', 'Panda'],
+    },
+    {
+      hint: 'burrow',
+      words: ['Rabbit'],
+    },
+    {
+      hint: 'masked',
+      words: ['Raccoon'],
+    },
+    {
+      hint: 'armor',
+      words: ['Armadillo'],
+    },
+    {
+      hint: 'bill',
+      words: ['Platypus'],
     },
     {
       hint: 'ocean',
       words: ['Otter', 'Seal', 'Dolphin', 'Whale', 'Shark', 'Octopus', 'Fish', 'Narwhal'],
     },
     {
+      hint: 'scutes',
+      words: ['Turtle'],
+    },
+    {
       hint: 'scales',
-      words: ['Turtle', 'Snake', 'Lizard', 'Crocodile', 'Alligator', 'Chameleon', 'Iguana'],
+      words: ['Snake', 'Lizard', 'Crocodile', 'Alligator', 'Chameleon', 'Iguana'],
     },
     {
       hint: 'pond',
@@ -230,6 +285,14 @@ export const HINT_GROUPS: Record<Category, HintGroup[]> = {
     {
       hint: 'web',
       words: ['Tarantula'],
+    },
+    {
+      hint: 'slow',
+      words: ['Sloth'],
+    },
+    {
+      hint: 'spines',
+      words: ['Hedgehog'],
     },
     {
       hint: 'legend',
