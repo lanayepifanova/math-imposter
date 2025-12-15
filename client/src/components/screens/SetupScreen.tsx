@@ -8,7 +8,6 @@ import { useState } from "react";
 export function SetupScreen() {
   const { gameState, setPlayers, setPlayerNames, setImposters, goToCategorySelect } = useGame();
   const [showTutorial, setShowTutorial] = useState(false);
-  const [editingNames, setEditingNames] = useState(true); // Always show names
   const [error, setError] = useState<string | null>(null);
 
   const handlePlayerChange = (delta: number) => {

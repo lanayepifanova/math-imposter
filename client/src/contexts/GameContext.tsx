@@ -1,5 +1,6 @@
-import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import { GameState, Category, Role, WORDS, CATEGORIES } from '@/lib/game-data';
+import { createContext, useContext, useState, ReactNode } from 'react';
+import { GameState, Category, Role, WORDS } from '@/lib/game-data';
+import { toast } from 'sonner';
 
 interface GameContextType {
   gameState: GameState;
@@ -20,6 +21,7 @@ const GameContext = createContext<GameContextType | undefined>(undefined);
 
 export function GameProvider({ children }: { children: ReactNode }) {
   const [customCategories, setCustomCategories] = useState<Record<string, string[]>>(() => {
+    if (typeof window === 'undefined') return {};
     const saved = localStorage.getItem('customCategories');
     return saved ? JSON.parse(saved) : {};
   });
@@ -69,14 +71,20 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const addCustomCategory = (name: string, words: string[]) => {
     setCustomCategories(prev => {
       const updated = { ...prev, [name]: words };
-      localStorage.setItem('customCategories', JSON.stringify(updated));
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('customCategories', JSON.stringify(updated));
+      }
       return updated;
     });
   };
 
   const startGame = (category: string) => {
-    const words = WORDS[category as Category] || customCategories[category];
-    const secretWord = words[Math.floor(Math.random() * words.length)];
+    const wordList = WORDS[category as Category] || customCategories[category];
+    if (!wordList?.length) {
+      toast.error("This category has no words yet. Please pick another.");
+      return;
+    }
+    const secretWord = wordList[Math.floor(Math.random() * wordList.length)];
     
     // Assign roles
     const roles: Role[] = Array(gameState.players).fill('crew');
