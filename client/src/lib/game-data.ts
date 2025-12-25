@@ -1,4 +1,4 @@
-export type Category = 'Objects' | 'Science' | 'Animals';
+export type Category = 'Objects' | 'Science' | 'Animals' | 'Places';
 
 export interface GameState {
   step: 'setup' | 'category-select' | 'roles' | 'start-player' | 'play' | 'vote' | 'result';
@@ -22,7 +22,8 @@ export const MAX_PLAYERS = 12;
 export const CATEGORIES: Category[] = [
   'Objects',
   'Science',
-  'Animals'
+  'Animals',
+  'Places'
 ];
 
 export interface CategoryStyle {
@@ -46,13 +47,19 @@ export const CATEGORY_STYLES: Record<Category, CategoryStyle> = {
     bgClass: 'bg-[var(--category-animals)]/10',
     bgHoverClass: 'group-hover:bg-[var(--category-animals)]/20',
     textClass: 'text-[var(--category-animals)]'
+  },
+  Places: {
+    bgClass: 'bg-[var(--category-places)]/10',
+    bgHoverClass: 'group-hover:bg-[var(--category-places)]/20',
+    textClass: 'text-[var(--category-places)]'
   }
 };
 
 export const CATEGORY_DESCRIPTIONS: Record<Category, string> = {
   Objects: 'Everyday Items • Tools • Furniture',
   Science: 'Math • Physics • Earth',
-  Animals: 'Wildlife • Pets • Creatures'
+  Animals: 'Wildlife • Pets • Creatures',
+  Places: 'Landmarks • Destinations • Spots'
 };
 
 export const CATEGORY_IMAGE_ICONS: Partial<Record<Category, string>> = {
@@ -232,7 +239,14 @@ export const WORDS: Record<Category, string[]> = {
     "Oasis", "Monsoon", "Climate Zone", "Steppe", "Wetland",
     "Marsh", "Lagoon", "Coral Reef", "Atoll", "Watershed",
     "River Basin", "Estuary", "Capital City", "Border", "Map",
-    "Compass Rose", "Scale", "Topography", "Elevation", "Time Zone"
+    "Compass Rose", "Scale", "Topography", "Elevation", "Time Zone",
+    "STEM Majors (CS, Math, Physics, Bio, Engineering)",
+    "Famous Scientists (Einstein, Curie, Feynman, etc.)",
+    "Academic Fields (Philosophy, Econ, Linguistics, Anthropology)",
+    "Research Topics (Quantum, AI, Climate, Genetics)",
+    "College Courses (Calc II, Linear Algebra, Organic Chem)",
+    "Tech Buzzwords (Blockchain, LLMs, SaaS, Web3)",
+    "Startup Roles (Founder, PM, SWE, VC, Designer)"
   ],
   Objects: [
     "Chair", "Table", "Desk", "Sofa", "Bed", 
@@ -284,7 +298,18 @@ export const WORDS: Record<Category, string[]> = {
     "Canvas", "Palette", "Craft Glue", "Extension Cord", "Power Strip", 
     "Surge Protector", "Battery", "Flash Drive", "Hard Drive", "Router", 
     "Ethernet Cable", "Mouse", "Keyboard", "Mouse Pad", "Monitor", 
-    "Printer", "Scanner", "Copier", "Shredder", "Filing Cabinet"
+    "Printer", "Scanner", "Copier", "Shredder", "Filing Cabinet",
+    "Truck", "Taxi", "Van",
+    "Helicopter", "Motorcycle", "Sailboat", "Tractor", "Submarine",
+    "Jeep", "Limousine", "Hot Air Balloon", "Rocket",
+    "Segway", "Monorail", "Rickshaw", "Gondola", "Hovercraft",
+    "Cable Car", "Zeppelin", "Tuk Tuk", "Snowmobile", "Amphibious Vehicle",
+    "Pizza", "Apple", "Bread", "Cake", "Ice Cream",
+    "Banana", "Sandwich", "Milk", "Cookie", "Cheese",
+    "Spaghetti", "Hamburger", "Popcorn", "Salad", "Muffin",
+    "Taco", "Yogurt", "Cereal", "Peanut Butter", "Chicken",
+    "Croissant", "Quiche", "Sushi", "Ravioli", "Guacamole",
+    "Eggplant", "Avocado", "Falafel", "Pomegranate", "Wasabi"
   ],
   Animals: [
     "Dog", "Cat", "Horse", "Cow", "Sheep",
@@ -301,6 +326,39 @@ export const WORDS: Record<Category, string[]> = {
     "Dragon", "Fairy", "Wizard", "Giant", "Mermaid",
     "Troll", "Elf", "Unicorn", "Witch", "Knight",
     "Griffin", "Phoenix", "Centaur", "Minotaur", "Pegasus",
-    "Cyclops", "Goblin", "Genie", "Werewolf", "Vampire"
+    "Cyclops", "Goblin", "Genie", "Werewolf", "Vampire",
+    "Fish", "Duck", "Bird",
+    "Armadillo", "Platypus", "Narwhal", "Chameleon", "Wombat",
+    "Axolotl", "Sloth", "Tarantula", "Iguana", "Hedgehog"
+  ],
+  Places: [
+    "School", "Park", "Beach", "Home", "Zoo",
+    "Farm", "Playground", "Mall", "Hospital", "Library",
+    "City Hall", "Stadium", "Airport", "Theater", "Aquarium",
+    "Museum", "Restaurant", "Castle", "Mountain", "Bridge",
+    "Tree", "Rock", "River", "Sun", "Moon",
+    "Flower", "Grass", "Cloud", "Leaf",
+    "Volcano", "Glacier", "Canyon", "Desert", "Jungle",
+    "Waterfall", "Ocean", "Storm", "Rainbow", "Cave",
+    "Aurora Borealis", "Tsunami", "Earthquake", "Meteor", "Eclipse",
+    "Black Hole", "Sandstorm", "Tornado", "Coral Reef", "Fossil",
+    "Pyramids", "Eiffel Tower", "Great Wall", "Taj Mahal", "Colosseum",
+    "Machu Picchu", "Stonehenge", "Sydney Opera House", "Statue of Liberty", "Mount Everest",
+    "United States", "Canada", "Mexico", "Brazil", "Argentina",
+    "United Kingdom", "France", "Germany", "Italy", "Spain",
+    "Japan", "China", "India", "South Korea", "Australia",
+    "New York", "Los Angeles", "Chicago", "Toronto", "Vancouver",
+    "Mexico City", "Rio de Janeiro", "Sao Paulo", "London", "Paris",
+    "Rome", "Barcelona", "Berlin", "Tokyo", "Osaka",
+    "Seoul", "Beijing", "Shanghai", "Sydney", "Melbourne",
+    "Dubai", "Singapore", "Hong Kong", "Bangkok", "Istanbul",
+    "Pizzeria", "Sushi Bar", "Steakhouse", "Diner", "Cafe",
+    "Bistro", "Bakery", "Food Truck", "BBQ Joint", "Seafood Grill",
+    "Madison Square Garden", "Wembley Stadium", "Yankee Stadium", "Camp Nou", "Rose Bowl",
+    "Fenway Park", "Staples Center", "O2 Arena", "Maracana Stadium", "Old Trafford",
+    "Mount Fuji", "Mount Kilimanjaro", "Denali", "K2", "Mont Blanc",
+    "Matterhorn", "Table Mountain", "Burj Khalifa", "Empire State Building", "Golden Gate Bridge",
+    "CN Tower", "Space Needle", "Petronas Towers", "Buckingham Palace", "Big Ben",
+    "Louvre", "Sagrada Familia", "Christ the Redeemer", "Times Square", "Grand Canyon"
   ],
 };
