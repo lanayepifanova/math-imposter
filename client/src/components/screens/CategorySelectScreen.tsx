@@ -39,7 +39,7 @@ export function CategorySelectScreen() {
             key={cat}
             hoverEffect
             onClick={() => startGame(cat)}
-            className="flex items-center gap-6 p-5 group border-transparent hover:border-stone-200"
+            className="flex items-center gap-6 p-5 group border-transparent hover:border-stone-200 ink-wash-card"
           >
             <div className={`w-16 h-16 rounded-2xl p-3 transition-colors duration-300 ${categoryStyle.bgClass} ${categoryStyle.bgHoverClass}`}>
               {categoryImage ? (
@@ -72,7 +72,7 @@ export function CategorySelectScreen() {
             key={cat}
             hoverEffect
             onClick={() => startGame(cat)}
-            className="flex items-center gap-6 p-5 group border-transparent hover:border-stone-200"
+            className="flex items-center gap-6 p-5 group border-transparent hover:border-stone-200 ink-wash-card"
           >
             <div className="w-16 h-16 rounded-2xl p-3 transition-colors duration-300 bg-stone-100 group-hover:bg-stone-200 flex items-center justify-center">
               <span className="text-2xl font-bold text-stone-400 group-hover:text-stone-600">?</span>
@@ -92,7 +92,7 @@ export function CategorySelectScreen() {
         {/* Create New Button */}
         <button
           onClick={() => setIsCustomDialogOpen(true)}
-          className="w-full p-4 rounded-3xl border-2 border-dashed border-stone-300 text-stone-400 hover:border-primary hover:text-primary hover:bg-primary/5 transition-all duration-300 flex items-center justify-center gap-2 font-bold font-lato uppercase tracking-wider"
+          className="w-full p-4 rounded-3xl border-2 border-dashed border-stone-300 text-stone-400 hover:border-primary hover:text-primary hover:bg-primary/5 transition-all duration-300 flex items-center justify-center gap-2 font-bold font-lato uppercase tracking-wider pressable"
         >
           <Plus className="w-5 h-5" />
           Create Custom Category

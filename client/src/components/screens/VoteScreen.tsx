@@ -38,7 +38,7 @@ export function VoteScreen() {
                 ? role === 'imposter' 
                   ? 'border-accent bg-accent/5' 
                   : 'border-primary bg-primary/5'
-                : 'border-transparent hover:border-stone-200 hover:shadow-md cursor-pointer bg-white'
+                : 'border-transparent hover:border-stone-200 hover:shadow-md cursor-pointer bg-white ink-wash-card'
             }`}
             onClick={() => setRevealedRoles(true)}
           >
@@ -60,7 +60,7 @@ export function VoteScreen() {
 
       {revealedRoles && (
         <div className="w-full space-y-6 animate-in slide-in-from-bottom-8 fade-in duration-700">
-          <GlassCard className="text-center p-8 border-stone-100 bg-white shadow-xl">
+          <GlassCard className="text-center p-8 border-stone-100 bg-white shadow-xl ink-wash-card">
             <p className="text-xs text-stone-400 uppercase tracking-widest mb-4 font-bold">The Secret Word Was</p>
             <p className="text-4xl font-playfair font-bold text-stone-800">{gameState.secretWord}</p>
           </GlassCard>

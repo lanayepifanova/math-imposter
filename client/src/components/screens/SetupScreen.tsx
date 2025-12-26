@@ -45,7 +45,7 @@ export function SetupScreen() {
       <div className="text-center space-y-3 relative">
         <button 
           onClick={() => setShowTutorial(true)}
-          className="absolute right-0 top-0 p-2 text-stone-400 hover:text-primary transition-colors"
+          className="absolute right-0 top-0 p-2 text-stone-400 hover:text-primary transition-colors pressable"
           aria-label="How to play"
         >
           <HelpCircle className="w-6 h-6" />
@@ -168,7 +168,7 @@ export function SetupScreen() {
           <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full p-6 relative animate-in zoom-in-95 duration-300 border border-stone-100">
             <button 
               onClick={() => setShowTutorial(false)}
-              className="absolute right-4 top-4 p-2 text-stone-400 hover:text-stone-600 transition-colors"
+              className="absolute right-4 top-4 p-2 text-stone-400 hover:text-stone-600 transition-colors pressable"
             >
               <X className="w-6 h-6" />
             </button>

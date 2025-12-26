@@ -17,14 +17,23 @@ function GameContainer() {
         <div className="absolute bottom-[-20%] right-[-20%] w-[70%] h-[70%] bg-secondary/10 rounded-full blur-[120px]" />
         <div className="absolute top-[40%] left-[40%] w-[40%] h-[40%] bg-accent/5 rounded-full blur-[100px]" />
       </div>
+      <div className="math-doodles fixed inset-0 pointer-events-none z-0">
+        <span className="doodle doodle-1" aria-hidden="true" />
+        <span className="doodle doodle-2" aria-hidden="true" />
+        <span className="doodle doodle-3" aria-hidden="true" />
+        <span className="doodle doodle-4" aria-hidden="true" />
+        <span className="doodle doodle-5" aria-hidden="true" />
+      </div>
 
       <div className="relative z-10 w-full max-w-lg mx-auto">
-        {gameState.step === 'setup' && <SetupScreen />}
-        {gameState.step === 'category-select' && <CategorySelectScreen />}
-        {gameState.step === 'roles' && <RoleRevealScreen />}
-        {gameState.step === 'start-player' && <StartingPlayerScreen />}
-        {gameState.step === 'play' && <PlayScreen />}
-        {gameState.step === 'vote' && <VoteScreen />}
+        <div key={gameState.step} className="screen-transition">
+          {gameState.step === 'setup' && <SetupScreen />}
+          {gameState.step === 'category-select' && <CategorySelectScreen />}
+          {gameState.step === 'roles' && <RoleRevealScreen />}
+          {gameState.step === 'start-player' && <StartingPlayerScreen />}
+          {gameState.step === 'play' && <PlayScreen />}
+          {gameState.step === 'vote' && <VoteScreen />}
+        </div>
       </div>
     </div>
   );
