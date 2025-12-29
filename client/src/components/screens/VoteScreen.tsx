@@ -13,7 +13,7 @@ export function VoteScreen() {
         variant="ghost"
         size="sm"
         onClick={goToStartPlayer}
-        className="fixed left-4 top-4 z-10"
+        className="fixed left-4 top-0 mt-[env(safe-area-inset-top)] z-20"
         disabled={revealedRoles}
       >
         Back

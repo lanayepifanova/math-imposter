@@ -44,7 +44,7 @@ export function SetupScreen() {
       <div className="text-center space-y-3 relative">
         <button 
           onClick={() => setShowTutorial(true)}
-          className="fixed right-4 top-4 z-10 px-2 py-1 text-xs font-lato font-bold uppercase tracking-widest text-foreground/60 hover:text-primary transition-colors pressable"
+          className="fixed right-4 top-0 mt-[env(safe-area-inset-top)] z-10 px-2 py-1 text-xs font-lato font-bold uppercase tracking-widest text-foreground/60 hover:text-primary transition-colors pressable"
           aria-label="How to play"
         >
           How to play
@@ -69,7 +69,7 @@ export function SetupScreen() {
           <div className="flex gap-4">
             <NeonButton 
               variant="ghost" 
-              className="flex-1 bg-background hover:bg-foreground/10 border border-border"
+              className="flex-1 bg-background hover:bg-foreground/10 border border-border outline outline-1 outline-foreground/40"
               onClick={() => handlePlayerChange(-1)}
               disabled={gameState.players <= MIN_PLAYERS}
             >
@@ -77,7 +77,7 @@ export function SetupScreen() {
             </NeonButton>
             <NeonButton 
               variant="ghost" 
-              className="flex-1 bg-background hover:bg-foreground/10 border border-border"
+              className="flex-1 bg-background hover:bg-foreground/10 border border-border outline outline-1 outline-foreground/40"
               onClick={() => handlePlayerChange(1)}
               disabled={gameState.players >= MAX_PLAYERS}
             >
@@ -127,7 +127,7 @@ export function SetupScreen() {
           <div className="flex gap-4">
             <NeonButton 
               variant="ghost" 
-              className="flex-1 bg-background hover:bg-foreground/10 text-accent hover:text-accent border border-border"
+              className="flex-1 bg-background hover:bg-foreground/10 text-accent hover:text-accent border border-border outline outline-1 outline-foreground/40"
               onClick={() => handleImposterChange(-1)}
               disabled={gameState.imposters <= 1}
             >
@@ -135,7 +135,7 @@ export function SetupScreen() {
             </NeonButton>
             <NeonButton 
               variant="ghost" 
-              className="flex-1 bg-background hover:bg-foreground/10 text-accent hover:text-accent border border-border"
+              className="flex-1 bg-background hover:bg-foreground/10 text-accent hover:text-accent border border-border outline outline-1 outline-foreground/40"
               onClick={() => handleImposterChange(1)}
               disabled={gameState.imposters >= gameState.players - 1}
             >
