@@ -2,12 +2,18 @@ import { GlassCard } from "@/components/GlassCard";
 import { NeonButton } from "@/components/NeonButton";
 import { useGame } from "@/contexts/GameContext";
 import { MAX_PLAYERS, MIN_PLAYERS } from "@/lib/game-data";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 export function SetupScreen() {
   const { gameState, setPlayers, setPlayerNames, setImposters, goToCategorySelect } = useGame();
   const [showTutorial, setShowTutorial] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    setPortalRoot(document.body);
+  }, []);
 
   const handlePlayerChange = (delta: number) => {
     const newCount = Math.max(MIN_PLAYERS, Math.min(MAX_PLAYERS, gameState.players + delta));
@@ -42,13 +48,17 @@ export function SetupScreen() {
   return (
     <div className="flex flex-col gap-6 max-w-sm mx-auto w-full animate-in fade-in slide-in-from-bottom-4 duration-700">
       <div className="text-center space-y-3 relative">
-        <button 
-          onClick={() => setShowTutorial(true)}
-          className="fixed right-4 top-0 mt-[env(safe-area-inset-top)] z-10 px-2 py-1 text-xs font-lato font-bold uppercase tracking-widest text-foreground/60 hover:text-primary transition-colors pressable"
-          aria-label="How to play"
-        >
-          How to play
-        </button>
+        {portalRoot &&
+          createPortal(
+            <button 
+              onClick={() => setShowTutorial(true)}
+              className="fixed right-4 top-[env(safe-area-inset-top)] z-30 px-2 py-1 text-xs font-lato font-bold uppercase tracking-widest text-foreground/60 hover:text-primary transition-colors pressable"
+              aria-label="How to play"
+            >
+              How to play
+            </button>,
+            portalRoot
+          )}
         <h1 className="text-4xl md:text-5xl font-playfair font-bold text-foreground tracking-tight">
           Imposter
         </h1>
