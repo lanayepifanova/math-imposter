@@ -47,7 +47,7 @@ export function RoleRevealScreen() {
         </p>
       </div>
 
-      <GlassCard className="w-full max-w-[260px] mx-auto aspect-[4/5] flex flex-col items-center justify-center relative overflow-hidden group bg-card shadow-xl border-border ink-wash-card">
+      <GlassCard className="w-full max-w-[360px] mx-auto mt-6 aspect-[16/10] flex flex-col items-center justify-center relative overflow-hidden group bg-card shadow-xl border-border ink-wash-card">
         {!isRevealed ? (
           <div 
             className="absolute inset-0 flex flex-col items-center justify-center bg-background/60 backdrop-blur-sm z-10 cursor-pointer transition-all hover:bg-background/30"
