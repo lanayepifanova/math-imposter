@@ -21,7 +21,7 @@ export function VoteScreen() {
             variant="ghost"
             size="sm"
             onClick={goToStartPlayer}
-            className="fixed left-4 top-[calc(env(safe-area-inset-top)+0.75rem)] z-30"
+            className="fixed left-4 top-[calc(env(safe-area-inset-top)+0.75rem)] md:top-[calc(env(safe-area-inset-top)+1.5rem)] z-30"
             disabled={revealedRoles}
           >
             Back

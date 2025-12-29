@@ -52,7 +52,7 @@ export function SetupScreen() {
           createPortal(
             <button 
               onClick={() => setShowTutorial(true)}
-              className="fixed right-4 top-[calc(env(safe-area-inset-top)+0.75rem)] z-30 px-2 py-1 text-xs font-lato font-bold uppercase tracking-widest text-foreground/60 hover:text-primary transition-colors pressable"
+              className="fixed right-4 top-[calc(env(safe-area-inset-top)+0.75rem)] md:top-[calc(env(safe-area-inset-top)+1.5rem)] z-30 px-2 py-1 text-xs font-lato font-bold uppercase tracking-widest text-foreground/60 hover:text-primary transition-colors pressable"
               aria-label="How to play"
             >
               How to play
