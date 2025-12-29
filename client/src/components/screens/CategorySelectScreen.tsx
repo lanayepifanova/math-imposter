@@ -2,9 +2,7 @@ import { CustomCategoryDialog } from "@/components/CustomCategoryDialog";
 import { GlassCard } from "@/components/GlassCard";
 import { NeonButton } from "@/components/NeonButton";
 import { useGame } from "@/contexts/GameContext";
-import { CATEGORY_DESCRIPTIONS, CATEGORY_IMAGE_ICONS, CATEGORY_STYLES, CATEGORIES } from "@/lib/game-data";
-import { CATEGORY_ICON_COMPONENTS } from "@/lib/category-ui";
-import { ArrowLeft, Plus } from "lucide-react";
+import { CATEGORY_DESCRIPTIONS, CATEGORIES } from "@/lib/game-data";
 import { useState } from "react";
 
 export function CategorySelectScreen() {
@@ -12,56 +10,35 @@ export function CategorySelectScreen() {
   const [isCustomDialogOpen, setIsCustomDialogOpen] = useState(false);
 
   return (
-    <div className="flex flex-col gap-8 max-w-md mx-auto w-full animate-in fade-in slide-in-from-right-8 duration-500">
+    <div className="flex flex-col gap-6 max-w-sm mx-auto w-full animate-in fade-in slide-in-from-right-8 duration-500">
       <div className="flex flex-col items-center text-center space-y-3">
         <NeonButton
           variant="ghost"
           size="sm"
           onClick={goToSetup}
-          className="self-start gap-2"
+          className="self-start"
         >
-          <ArrowLeft className="w-4 h-4" />
           Back
         </NeonButton>
-        <h2 className="text-4xl font-playfair font-bold text-foreground">Select Discipline</h2>
-        <p className="text-foreground/70 font-lato">Choose the field of study for this round.</p>
+        <h2 className="text-3xl font-playfair font-bold text-foreground">Select Discipline</h2>
+        <p className="text-foreground/70 font-lato text-sm">Choose the field of study for this round.</p>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 pb-20">
+      <div className="grid grid-cols-1 gap-3 pb-16">
         {/* Standard Categories */}
         {CATEGORIES.map((cat) => {
-          const categoryStyle = CATEGORY_STYLES[cat];
-          const categoryImage = CATEGORY_IMAGE_ICONS[cat];
-          const CategoryIcon = CATEGORY_ICON_COMPONENTS[cat];
-
           return (
           <GlassCard 
             key={cat}
             hoverEffect
             onClick={() => startGame(cat)}
-            className="flex items-center gap-6 p-5 group border-transparent hover:border-foreground/40 ink-wash-card"
+            className="flex items-center gap-3 p-3 group border-transparent hover:border-foreground/40 ink-wash-card"
           >
-            <div className={`w-16 h-16 rounded-2xl p-3 transition-colors duration-300 ${categoryStyle.bgClass} ${categoryStyle.bgHoverClass}`}>
-              {categoryImage ? (
-                <img 
-                  src={categoryImage} 
-                  alt={cat}
-                  className="w-full h-full object-contain grayscale contrast-200 brightness-0"
-                />
-              ) : CategoryIcon ? (
-                <CategoryIcon className={`w-full h-full ${categoryStyle.textClass}`} />
-              ) : (
-                <span className="w-full h-full flex items-center justify-center text-2xl font-bold text-foreground/60">?</span>
-              )}
-            </div>
             <div className="flex-1">
-              <h3 className="text-2xl font-bold font-playfair text-foreground">{cat}</h3>
-              <p className="text-xs text-foreground/60 font-lato uppercase tracking-wider mt-1">
+              <h3 className="text-xl font-bold font-playfair text-foreground">{cat}</h3>
+              <p className="text-[11px] text-foreground/60 font-lato uppercase tracking-wider mt-1">
                 {CATEGORY_DESCRIPTIONS[cat]}
               </p>
-            </div>
-            <div className="text-foreground/50 group-hover:text-foreground transition-colors">
-              &rarr;
             </div>
           </GlassCard>
         )})}
@@ -72,19 +49,13 @@ export function CategorySelectScreen() {
             key={cat}
             hoverEffect
             onClick={() => startGame(cat)}
-            className="flex items-center gap-6 p-5 group border-transparent hover:border-foreground/40 ink-wash-card"
+            className="flex items-center gap-3 p-3 group border-transparent hover:border-foreground/40 ink-wash-card"
           >
-            <div className="w-16 h-16 rounded-2xl p-3 transition-colors duration-300 bg-background group-hover:bg-foreground/10 flex items-center justify-center">
-              <span className="text-2xl font-bold text-foreground/60 group-hover:text-foreground/80">?</span>
-            </div>
             <div className="flex-1">
-              <h3 className="text-2xl font-bold font-playfair text-foreground">{cat}</h3>
-              <p className="text-xs text-foreground/60 font-lato uppercase tracking-wider mt-1">
+              <h3 className="text-xl font-bold font-playfair text-foreground">{cat}</h3>
+              <p className="text-[11px] text-foreground/60 font-lato uppercase tracking-wider mt-1">
                 Custom Category
               </p>
-            </div>
-            <div className="text-foreground/50 group-hover:text-foreground transition-colors">
-              &rarr;
             </div>
           </GlassCard>
         ))}
@@ -92,9 +63,8 @@ export function CategorySelectScreen() {
         {/* Create New Button */}
         <button
           onClick={() => setIsCustomDialogOpen(true)}
-          className="w-full p-4 rounded-3xl border-2 border-dashed border-border text-foreground/60 hover:border-primary hover:text-primary hover:bg-primary/5 transition-all duration-300 flex items-center justify-center gap-2 font-bold font-lato uppercase tracking-wider pressable"
+          className="w-full p-3 rounded-2xl border border-dashed border-border text-foreground/60 hover:border-primary hover:text-primary hover:bg-primary/5 transition-all duration-300 flex items-center justify-center font-bold font-lato uppercase tracking-wider text-xs pressable"
         >
-          <Plus className="w-5 h-5" />
           Create Custom Category
         </button>
       </div>

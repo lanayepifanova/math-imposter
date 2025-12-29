@@ -2,7 +2,6 @@ import { GlassCard } from "@/components/GlassCard";
 import { NeonButton } from "@/components/NeonButton";
 import { useGame } from "@/contexts/GameContext";
 import { MAX_PLAYERS, MIN_PLAYERS } from "@/lib/game-data";
-import { ArrowRight, Edit2, HelpCircle, Minus, Plus, Users, UserX, X } from "lucide-react";
 import { useState } from "react";
 
 export function SetupScreen() {
@@ -41,35 +40,31 @@ export function SetupScreen() {
   };
 
   return (
-    <div className="flex flex-col gap-8 max-w-md mx-auto w-full animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div className="flex flex-col gap-6 max-w-sm mx-auto w-full animate-in fade-in slide-in-from-bottom-4 duration-700">
       <div className="text-center space-y-3 relative">
         <button 
           onClick={() => setShowTutorial(true)}
-          className="absolute right-0 top-0 p-2 text-foreground/60 hover:text-primary transition-colors pressable"
+          className="absolute right-0 top-0 px-2 py-1 text-xs font-lato font-bold uppercase tracking-widest text-foreground/60 hover:text-primary transition-colors pressable"
           aria-label="How to play"
         >
-          <HelpCircle className="w-6 h-6" />
+          How to play
         </button>
-        <h1 className="text-5xl md:text-6xl font-playfair font-bold text-foreground tracking-tight">
+        <h1 className="text-4xl md:text-5xl font-playfair font-bold text-foreground tracking-tight">
           Imposter
         </h1>
-        <div className="h-1 w-20 bg-primary mx-auto rounded-full opacity-50"></div>
-        <p className="text-foreground/70 font-lato tracking-widest uppercase text-xs font-bold">
+        <p className="text-foreground/70 font-lato tracking-widest uppercase text-[10px] font-bold">
           All Categories
         </p>
       </div>
 
-      <GlassCard className="space-y-8">
+      <GlassCard className="space-y-6">
         {/* Player Count Control */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <label className="text-lg font-playfair text-foreground flex items-center gap-3">
-              <div className="p-2 bg-primary/20 rounded-full text-primary-foreground">
-                <Users className="w-4 h-4 text-primary" />
-              </div>
               Players
             </label>
-            <span className="text-3xl font-playfair font-bold text-foreground">{gameState.players}</span>
+            <span className="text-2xl font-playfair font-bold text-foreground">{gameState.players}</span>
           </div>
           <div className="flex gap-4">
             <NeonButton 
@@ -78,7 +73,7 @@ export function SetupScreen() {
               onClick={() => handlePlayerChange(-1)}
               disabled={gameState.players <= MIN_PLAYERS}
             >
-              <Minus className="w-5 h-5" />
+              -
             </NeonButton>
             <NeonButton 
               variant="ghost" 
@@ -86,14 +81,13 @@ export function SetupScreen() {
               onClick={() => handlePlayerChange(1)}
               disabled={gameState.players >= MAX_PLAYERS}
             >
-              <Plus className="w-5 h-5" />
+              +
             </NeonButton>
           </div>
 
           {/* Player Name Inputs */}
           <div className="space-y-2">
             <label className="text-sm font-bold text-foreground/60 uppercase tracking-wider flex items-center gap-2">
-              <Edit2 className="w-3 h-3" />
               Player Names
             </label>
             <div className="grid grid-cols-2 gap-3 animate-in slide-in-from-top-2 fade-in duration-300">
@@ -120,18 +114,15 @@ export function SetupScreen() {
           </div>
         </div>
 
-        <div className="h-px w-full bg-background"></div>
+        <div className="h-px w-full bg-border"></div>
 
         {/* Imposter Count Control */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <label className="text-lg font-playfair text-foreground flex items-center gap-3">
-              <div className="p-2 bg-accent/20 rounded-full text-accent-foreground">
-                <UserX className="w-4 h-4 text-accent" />
-              </div>
               Imposters
             </label>
-            <span className="text-3xl font-playfair font-bold text-accent">{gameState.imposters}</span>
+            <span className="text-2xl font-playfair font-bold text-accent">{gameState.imposters}</span>
           </div>
           <div className="flex gap-4">
             <NeonButton 
@@ -140,7 +131,7 @@ export function SetupScreen() {
               onClick={() => handleImposterChange(-1)}
               disabled={gameState.imposters <= 1}
             >
-              <Minus className="w-5 h-5" />
+              -
             </NeonButton>
             <NeonButton 
               variant="ghost" 
@@ -148,7 +139,7 @@ export function SetupScreen() {
               onClick={() => handleImposterChange(1)}
               disabled={gameState.imposters >= gameState.players - 1}
             >
-              <Plus className="w-5 h-5" />
+              +
             </NeonButton>
           </div>
         </div>
@@ -156,31 +147,31 @@ export function SetupScreen() {
         <NeonButton 
           fullWidth 
           onClick={handleNextStep}
-          className="mt-4 gap-2 shadow-md"
+          className="mt-2 shadow-md"
         >
-          Next Step <ArrowRight className="w-4 h-4" />
+          Next Step
         </NeonButton>
       </GlassCard>
 
       {/* Tutorial Overlay */}
       {showTutorial && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-foreground/20 backdrop-blur-sm animate-in fade-in duration-300">
-          <div className="bg-card rounded-3xl shadow-2xl max-w-md w-full p-6 relative animate-in zoom-in-95 duration-300 border border-border">
+          <div className="bg-card rounded-2xl shadow-2xl max-w-sm w-full p-5 relative animate-in zoom-in-95 duration-300 border border-border">
             <button 
               onClick={() => setShowTutorial(false)}
-              className="absolute right-4 top-4 p-2 text-foreground/60 hover:text-foreground/80 transition-colors pressable"
+              className="absolute right-4 top-4 px-2 py-1 text-xs font-lato font-bold uppercase tracking-widest text-foreground/60 hover:text-foreground/80 transition-colors pressable"
             >
-              <X className="w-6 h-6" />
+              Close
             </button>
             
             <div className="text-center mb-6">
-              <h3 className="text-2xl font-playfair font-bold text-foreground">How to Play</h3>
-              <div className="h-1 w-12 bg-primary mx-auto rounded-full mt-2 opacity-50"></div>
+              <h3 className="text-xl font-playfair font-bold text-foreground">How to Play</h3>
+              <div className="h-px w-12 bg-foreground/30 mx-auto mt-2"></div>
             </div>
 
-            <div className="space-y-6 font-lato text-foreground/80">
+            <div className="space-y-5 font-lato text-foreground/80 text-sm">
               <div className="flex gap-4">
-                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0 text-primary font-bold">1</div>
+                <div className="w-7 h-7 rounded-full bg-foreground/10 flex items-center justify-center shrink-0 text-foreground font-bold">1</div>
                 <div>
                   <h4 className="font-bold text-foreground mb-1">Setup</h4>
                   <p className="text-sm">Choose the number of players and imposters, then pick a category.</p>
@@ -188,7 +179,7 @@ export function SetupScreen() {
               </div>
 
               <div className="flex gap-4">
-                <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center shrink-0 text-secondary font-bold">2</div>
+                <div className="w-7 h-7 rounded-full bg-foreground/10 flex items-center justify-center shrink-0 text-foreground font-bold">2</div>
                 <div>
                   <h4 className="font-bold text-foreground mb-1">Reveal Roles</h4>
                   <p className="text-sm">Pass the device around. Crewmates see a secret word; Imposters see nothing.</p>
@@ -196,7 +187,7 @@ export function SetupScreen() {
               </div>
 
               <div className="flex gap-4">
-                <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center shrink-0 text-accent font-bold">3</div>
+                <div className="w-7 h-7 rounded-full bg-foreground/10 flex items-center justify-center shrink-0 text-foreground font-bold">3</div>
                 <div>
                   <h4 className="font-bold text-foreground mb-1">Discuss & Vote</h4>
                   <p className="text-sm">Describe the word without giving it away. Vote to eliminate the imposter!</p>

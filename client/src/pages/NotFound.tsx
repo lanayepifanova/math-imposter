@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle, Home } from "lucide-react";
 import { useLocation } from "wouter";
 
 export default function NotFound() {
@@ -12,15 +11,8 @@ export default function NotFound() {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-background">
-      <Card className="w-full max-w-lg mx-4 shadow-lg border-0 bg-card/80 backdrop-blur-sm">
+      <Card className="w-full max-w-sm mx-4 shadow-lg border-0 bg-card/80 backdrop-blur-sm">
         <CardContent className="pt-8 pb-8 text-center">
-          <div className="flex justify-center mb-6">
-            <div className="relative">
-              <div className="absolute inset-0 bg-foreground/10 rounded-full animate-pulse" />
-              <AlertCircle className="relative h-16 w-16 text-foreground" />
-            </div>
-          </div>
-
           <h1 className="text-4xl font-bold text-foreground mb-2">404</h1>
 
           <h2 className="text-xl font-semibold text-foreground/80 mb-4">
@@ -36,9 +28,8 @@ export default function NotFound() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button
               onClick={handleGoHome}
-              className="bg-foreground hover:bg-foreground/90 text-background px-6 py-2.5 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
+              className="bg-foreground hover:bg-foreground/90 text-background px-6 py-2.5 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg text-xs uppercase tracking-widest font-bold"
             >
-              <Home className="w-4 h-4 mr-2" />
               Go Home
             </Button>
           </div>

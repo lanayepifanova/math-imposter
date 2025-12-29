@@ -14,7 +14,7 @@ export function GlassCard({ children, className, hoverEffect = false, onClick }:
     <div 
       onClick={onClick}
       className={cn(
-        "bg-card shadow-sm border border-border rounded-3xl p-8 transition-all duration-500",
+        "bg-card shadow-sm border border-border rounded-2xl p-4 transition-all duration-500",
         hoverEffect && "hover:shadow-lg hover:-translate-y-1 cursor-pointer hover:border-foreground/40",
         className
       )}
