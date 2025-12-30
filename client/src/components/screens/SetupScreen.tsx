@@ -5,15 +5,64 @@ import { MAX_PLAYERS, MIN_PLAYERS } from "@/lib/game-data";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
+const savedNamesKey = "savedPlayerNames";
+
 export function SetupScreen() {
   const { gameState, setPlayers, setPlayerNames, setImposters, goToCategorySelect } = useGame();
   const [showTutorial, setShowTutorial] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
+  const [savedNames, setSavedNames] = useState<string[]>([]);
 
   useEffect(() => {
     setPortalRoot(document.body);
   }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const stored = localStorage.getItem(savedNamesKey);
+    if (!stored) return;
+    try {
+      const parsed = JSON.parse(stored);
+      if (Array.isArray(parsed)) {
+        setSavedNames(parsed.filter((name) => typeof name === "string"));
+      }
+    } catch {
+      // Ignore corrupted local storage entries.
+    }
+  }, []);
+
+  const persistSavedNames = (names: string[]) => {
+    setSavedNames(names);
+    if (typeof window !== "undefined") {
+      localStorage.setItem(savedNamesKey, JSON.stringify(names));
+    }
+  };
+
+  const handleSaveName = (name: string) => {
+    const trimmed = name.trim();
+    if (!trimmed) return;
+    const alreadySaved = savedNames.some(
+      (saved) => saved.toLowerCase() === trimmed.toLowerCase()
+    );
+    if (alreadySaved) return;
+    persistSavedNames([...savedNames, trimmed]);
+  };
+
+  const handleRemoveSavedName = (name: string) => {
+    persistSavedNames(savedNames.filter((saved) => saved !== name));
+  };
+
+  const handleUseSavedName = (name: string) => {
+    const trimmed = name.trim();
+    if (!trimmed) return;
+    const newNames = [...gameState.playerNames];
+    const emptyIndex = newNames.findIndex((entry) => !entry.trim());
+    if (emptyIndex === -1) return;
+    newNames[emptyIndex] = trimmed;
+    setPlayerNames(newNames);
+    if (error) setError(null);
+  };
 
   const handlePlayerChange = (delta: number) => {
     const newCount = Math.max(MIN_PLAYERS, Math.min(MAX_PLAYERS, gameState.players + delta));
@@ -104,24 +153,65 @@ export function SetupScreen() {
             </label>
             <div className="grid grid-cols-2 gap-3 animate-in slide-in-from-top-2 fade-in duration-300">
               {gameState.playerNames.map((name, idx) => (
-                <input
-                  key={idx}
-                  type="text"
-                  value={name}
-                  onChange={(e) => handleNameChange(idx, e.target.value)}
-                  className={`w-full p-2 rounded-lg bg-background border text-sm font-lato outline-none transition-colors ${
-                    !name.trim() && error 
-                      ? 'border-foreground focus:border-foreground focus:ring-1 focus:ring-foreground' 
-                      : 'border-border focus:border-primary focus:ring-1 focus:ring-primary'
-                  }`}
-                  placeholder={`Player ${idx + 1}`}
-                />
+                <div key={idx} className="flex gap-2 items-stretch">
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => handleNameChange(idx, e.target.value)}
+                    list="saved-player-names"
+                    className={`w-full p-2 rounded-lg bg-background border text-sm font-lato outline-none transition-colors ${
+                      !name.trim() && error 
+                        ? 'border-foreground focus:border-foreground focus:ring-1 focus:ring-foreground' 
+                        : 'border-border focus:border-primary focus:ring-1 focus:ring-primary'
+                    }`}
+                    placeholder={`Player ${idx + 1}`}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleSaveName(name)}
+                    disabled={!name.trim()}
+                    className="px-2 text-[10px] font-lato uppercase tracking-widest rounded-lg border border-border text-foreground/60 hover:text-foreground hover:border-foreground/60 transition-colors disabled:opacity-40 disabled:hover:text-foreground/60 disabled:hover:border-border"
+                  >
+                    Save
+                  </button>
+                </div>
               ))}
             </div>
             {error && (
               <p className="text-xs text-foreground font-bold text-center animate-in slide-in-from-top-1 fade-in">
                 {error}
               </p>
+            )}
+            {savedNames.length > 0 && (
+              <div className="space-y-2">
+                <p className="text-[11px] font-lato uppercase tracking-widest text-foreground/50">
+                  Saved Players
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {savedNames.map((name) => (
+                    <div
+                      key={name}
+                      className="flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1 text-xs font-lato text-foreground/70"
+                    >
+                      <button
+                        type="button"
+                        onClick={() => handleUseSavedName(name)}
+                        className="hover:text-foreground transition-colors"
+                      >
+                        {name}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveSavedName(name)}
+                        className="text-foreground/40 hover:text-foreground/80 transition-colors"
+                        aria-label={`Remove ${name}`}
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
             )}
           </div>
         </div>
@@ -164,6 +254,11 @@ export function SetupScreen() {
           Next Step
         </NeonButton>
       </GlassCard>
+      <datalist id="saved-player-names">
+        {savedNames.map((name) => (
+          <option key={name} value={name} />
+        ))}
+      </datalist>
 
       {/* Tutorial Overlay */}
       {showTutorial && (
