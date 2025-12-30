@@ -50,13 +50,15 @@ export function SetupScreen() {
       <div className="text-center space-y-3 relative">
         {portalRoot &&
           createPortal(
-            <button 
+            <NeonButton
+              variant="ghost"
+              size="sm"
               onClick={() => setShowTutorial(true)}
-              className="fixed left-4 top-[calc(env(safe-area-inset-top)+0.75rem)] md:top-[calc(env(safe-area-inset-top)+1.5rem)] z-30 px-2 py-1 text-xs font-lato font-bold uppercase tracking-widest text-foreground/60 hover:text-primary transition-colors pressable"
+              className="fixed left-4 top-[calc(env(safe-area-inset-top)+0.75rem)] md:top-[calc(env(safe-area-inset-top)+1.5rem)] z-30"
               aria-label="How to play"
             >
               How to play
-            </button>,
+            </NeonButton>,
             portalRoot
           )}
         <h1 className="text-4xl md:text-5xl font-playfair font-bold text-foreground tracking-tight">
