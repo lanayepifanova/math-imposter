@@ -1,19 +1,15 @@
 import { GlassCard } from "@/components/GlassCard";
 import { NeonButton } from "@/components/NeonButton";
-import { useAuth } from "@/contexts/AuthContext";
 import { useGame } from "@/contexts/GameContext";
 import { MAX_PLAYERS, MIN_PLAYERS } from "@/lib/game-data";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { useLocation } from "wouter";
 
 export function SetupScreen() {
   const { gameState, setPlayers, setPlayerNames, setImposters, goToCategorySelect } = useGame();
-  const { user } = useAuth();
   const [showTutorial, setShowTutorial] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
-  const [, setLocation] = useLocation();
 
   useEffect(() => {
     setPortalRoot(document.body);
@@ -56,7 +52,7 @@ export function SetupScreen() {
           createPortal(
             <button 
               onClick={() => setShowTutorial(true)}
-              className="fixed right-4 top-[calc(env(safe-area-inset-top)+0.75rem)] md:top-[calc(env(safe-area-inset-top)+1.5rem)] z-30 px-2 py-1 text-xs font-lato font-bold uppercase tracking-widest text-foreground/60 hover:text-primary transition-colors pressable"
+              className="fixed left-4 top-[calc(env(safe-area-inset-top)+0.75rem)] md:top-[calc(env(safe-area-inset-top)+1.5rem)] z-30 px-2 py-1 text-xs font-lato font-bold uppercase tracking-widest text-foreground/60 hover:text-primary transition-colors pressable"
               aria-label="How to play"
             >
               How to play
@@ -69,15 +65,6 @@ export function SetupScreen() {
         <p className="text-foreground/70 font-lato tracking-widest uppercase text-[10px] font-bold">
           All Categories
         </p>
-        <div className="flex items-center justify-center gap-3 pt-1">
-          <NeonButton
-            variant="ghost"
-            size="sm"
-            onClick={() => setLocation(user ? "/account" : "/auth")}
-          >
-            {user ? "Account" : "Sign in"}
-          </NeonButton>
-        </div>
       </div>
 
       <GlassCard className="space-y-6">

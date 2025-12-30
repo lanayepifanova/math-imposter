@@ -5,6 +5,7 @@ import NotFound from "@/pages/NotFound";
 import AccountPage from "@/pages/Account";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
+import { AccountShortcut } from "./components/AccountShortcut";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
@@ -38,6 +39,7 @@ function App() {
         <AuthProvider>
           <TooltipProvider>
             <Toaster />
+            <AccountShortcut />
             <Router />
           </TooltipProvider>
         </AuthProvider>
