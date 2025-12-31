@@ -8,6 +8,7 @@ type AuthContextValue = {
   loading: boolean;
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (email: string, password: string, displayName?: string) => Promise<void>;
+  updateDisplayName: (displayName: string) => Promise<void>;
   signOut: () => Promise<void>;
 };
 
@@ -74,6 +75,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           options: displayName ? { data: { display_name: displayName } } : undefined,
         });
         if (error) throw error;
+      },
+      updateDisplayName: async (displayName) => {
+        if (!supabase) {
+          throw new Error("Supabase is not configured.");
+        }
+        const trimmed = displayName.trim();
+        if (!trimmed) {
+          throw new Error("Display name cannot be empty.");
+        }
+        const { data, error } = await supabase.auth.updateUser({
+          data: { display_name: trimmed },
+        });
+        if (error) throw error;
+        if (data.user) {
+          setSession(prev => (prev ? { ...prev, user: data.user } : prev));
+        }
       },
       signOut: async () => {
         if (!supabase) {

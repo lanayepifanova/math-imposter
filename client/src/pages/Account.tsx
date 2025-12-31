@@ -2,15 +2,46 @@ import { GlassCard } from "@/components/GlassCard";
 import { NeonButton } from "@/components/NeonButton";
 import { RequireAuth } from "@/components/RequireAuth";
 import { useAuth } from "@/contexts/AuthContext";
+import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 
 export default function AccountPage() {
-  const { user, signOut } = useAuth();
+  const { user, signOut, updateDisplayName } = useAuth();
   const [, setLocation] = useLocation();
+  const [displayName, setDisplayName] = useState("");
+  const [status, setStatus] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    const currentName =
+      user?.user_metadata?.display_name ||
+      user?.user_metadata?.full_name ||
+      user?.user_metadata?.name ||
+      "";
+    setDisplayName(currentName);
+  }, [user]);
 
   const handleSignOut = async () => {
     await signOut();
     setLocation("/");
+  };
+
+  const handleSaveName = async () => {
+    if (!displayName.trim()) {
+      setStatus("Please enter a name to save.");
+      return;
+    }
+    try {
+      setSaving(true);
+      setStatus(null);
+      await updateDisplayName(displayName);
+      setStatus("Name saved.");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Could not update name.";
+      setStatus(message);
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -34,6 +65,27 @@ export default function AccountPage() {
               <p className="text-sm text-foreground/70 font-lato">
                 Manage your profile, friends, and saved categories here soon.
               </p>
+            </div>
+
+            <div className="space-y-3">
+              <label className="text-[11px] font-lato uppercase tracking-[0.2em] text-foreground/50">
+                Display Name
+              </label>
+              <div className="flex flex-col gap-3">
+                <input
+                  type="text"
+                  value={displayName}
+                  onChange={(event) => setDisplayName(event.target.value)}
+                  placeholder="Add your name"
+                  className="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm font-lato outline-none transition-colors focus:border-foreground"
+                />
+                <NeonButton fullWidth onClick={handleSaveName} disabled={saving}>
+                  {saving ? "Saving..." : "Save name"}
+                </NeonButton>
+                {status && (
+                  <p className="text-xs text-foreground/70 font-lato text-center">{status}</p>
+                )}
+              </div>
             </div>
 
             <div className="flex flex-col gap-3">
