@@ -132,10 +132,8 @@ export function GameProvider({ children }: { children: ReactNode }) {
       return;
     }
     const secretWord = wordList[Math.floor(Math.random() * wordList.length)];
-    const hintCandidates = wordList.filter(word => word !== secretWord);
-    const hintWord = hintCandidates.length
-      ? hintCandidates[Math.floor(Math.random() * hintCandidates.length)]
-      : category;
+    // Use the category name as the hint to keep it consistently related.
+    const hintWord = category;
     
     // Assign roles
     const roles: Role[] = Array(gameState.players).fill('crew');
