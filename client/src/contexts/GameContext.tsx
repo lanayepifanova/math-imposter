@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
-import { GameState, Category, Role, WORDS } from '@/lib/game-data';
+import { GameState, Category, Role, WORDS, getHintWord } from '@/lib/game-data';
 import { toast } from 'sonner';
 
 interface GameContextType {
@@ -132,8 +132,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
       return;
     }
     const secretWord = wordList[Math.floor(Math.random() * wordList.length)];
-    // Use the category name as the hint to keep it consistently related.
-    const hintWord = category;
+    const hintWord = getHintWord(category, secretWord, wordList);
     
     // Assign roles
     const roles: Role[] = Array(gameState.players).fill('crew');
